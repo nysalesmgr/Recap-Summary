@@ -291,16 +291,15 @@ function buildBreakdown(moveIn, moveOut, rate) {
 
 function optionSummaryBlock(r1, r2, r3, chosenOpt) {
   const mark = (n) => n === chosenOpt ? ' ✔ (selected)' : '';
-  const bold = (n, text) => n === chosenOpt ? `*** ${text} ***` : text;
-  return `${bold(1, `OPTION 1${mark(1)}`)}
+  return `OPTION 1${mark(1)}
 • ${money(r1)} per month inclusive of utilities
 • Payment made monthly, subject to background check, credit check and/or 3rd party guarantor
 
-${bold(2, `OPTION 2${mark(2)}`)}
+OPTION 2${mark(2)}
 • ${money(r2)} per month inclusive of utilities
 • Payments split into 2 instalments, no guarantor required
 
-${bold(3, `OPTION 3${mark(3)}`)}
+OPTION 3${mark(3)}
 • ${money(r3)} per month inclusive of utilities
 • Full rental paid upfront upon signing, no guarantor required`;
 }
@@ -487,8 +486,8 @@ function pickOption(n) {
   const labels = { 1: 'Option 1 — Monthly debit', 2: 'Option 2 — 2 instalments', 3: 'Option 3 — Full upfront' };
   document.getElementById('outputMeta').innerHTML = `<strong>${labels[n]}</strong> selected`;
 
-  // Render with bold for *** lines in preview
-  const rendered = escHtml(outputs[n]).replace(/\*\*\* (.*?) \*\*\*/g, '<strong>$1</strong>');
+  // Render with bold for selected option line in preview
+  const rendered = escHtml(outputs[n]).replace(/(OPTION \d ✔ \(selected\))/g, '<strong>$1</strong>');
   document.getElementById('outputArea').innerHTML = `<div class="output-text">${rendered}</div>`;
   document.getElementById('copyBtn').className = 'btn-copy';
   document.getElementById('copyBtn').innerHTML = '⎘ Copy text';
