@@ -8,50 +8,44 @@
   :root {
     --bg: #303c6c;
     --surface: #FFFFFF;
-    --surface2: #EEECEA;
     --border: #D8D4CE;
-    --border-strong: #B0AAA2;
     --text: #303c6c;
     --text-secondary: #5a6490;
     --text-hint: #9099be;
-    --accent: #303c6c;
-    --accent-light: #e8eaf3;
-    --opt1: #303c6c;
-    --opt1-light: #e8eaf3;
-    --opt2: #d4706b;
-    --opt2-light: #fdf0ef;
-    --opt3: #7aab96;
-    --opt3-light: #eaf4f0;
     --radius: 10px;
     --radius-sm: 6px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "Inter", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+  body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
 
-  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; position: sticky; top: 0; z-index: 10; }
+  header { background: #fff; border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; position: sticky; top: 0; z-index: 10; }
   .logo img { height: 80px; display: block; }
   .header-tag { font-size: 11px; font-weight: 500; background: #ffd881; color: #303c6c; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.02em; text-transform: uppercase; }
 
   .page { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; display: grid; grid-template-columns: 360px 1fr; gap: 1.5rem; align-items: start; }
 
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .panel { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   .panel-head { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
   .panel-head h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
   .panel-icon { width: 28px; height: 28px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 14px; background: #e8eaf3; color: #303c6c; }
   .panel-body { padding: 1.25rem; }
 
-  .form-group { margin-bottom: 14px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-  label { font-size: 12px; font-weight: 500; color: var(--text-secondary); display: block; margin-bottom: 5px; letter-spacing: 0.01em; }
-
-  input[type="text"], input[type="number"], input[type="date"], select {
+  .form-group { margin-bottom: 14px; }
+  label { font-size: 12px; font-weight: 500; color: var(--text-secondary); display: block; margin-bottom: 5px; }
+  input[type="text"], input[type="number"], select {
     width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm);
-    padding: 8px 10px; font-size: 13px; background: #ffffff; color: var(--text);
+    padding: 8px 10px; font-size: 13px; background: #fff; color: var(--text);
     font-family: inherit; transition: border-color 0.15s; outline: none;
   }
   input:focus, select:focus { border-color: #303c6c; }
   input[readonly] { background: #EEECEA; color: var(--text-secondary); cursor: default; }
-  select { cursor: pointer; }
+
+  .date-wrap { position: relative; display: flex; align-items: center; }
+  .date-wrap input[type="text"] { flex: 1; padding-right: 36px; }
+  .date-wrap input[type="date"] { position: absolute; right: 0; top: 0; width: 34px; height: 100%; opacity: 0; cursor: pointer; z-index: 2; }
+  .date-wrap::after { content: "📅"; position: absolute; right: 8px; font-size: 15px; pointer-events: none; z-index: 1; }
+  .date-parsed { font-size: 11px; color: #7aab96; margin-top: 3px; display: block; min-height: 16px; font-weight: 500; }
 
   .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
 
@@ -68,12 +62,10 @@
   .tag-summer { background: #fff3cd; color: #856404; }
   .tag-academic { background: #e8eaf3; color: #303c6c; }
 
-  .error-msg { font-size: 12px; color: #b03030; background: #fdf2f2; border: 1px solid #f0c0c0; border-radius: var(--radius-sm); padding: 8px 12px; margin-top: 10px; display: none; }
-
   .right-col { display: flex; flex-direction: column; gap: 1rem; }
 
   .summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .sum-card { border-radius: var(--radius-sm); padding: 12px 14px; border: 1px solid var(--border); background: var(--surface); }
+  .sum-card { border-radius: var(--radius-sm); padding: 12px 14px; border: 1px solid var(--border); background: #fff; }
   .sum-card-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
   .sum-card-val { font-size: 17px; font-weight: 700; letter-spacing: -0.03em; }
   .sum-card-sub { font-size: 11px; color: var(--text-hint); margin-top: 2px; }
@@ -83,38 +75,31 @@
 
   .option-select-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); padding: 1rem 1.25rem 0.6rem; }
   .option-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 1.25rem 1rem; }
-  .opt-btn { border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px 10px; cursor: pointer; background: #ffffff; font-family: inherit; text-align: center; transition: all 0.15s; }
+  .opt-btn { border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px 10px; cursor: pointer; background: #fff; font-family: inherit; text-align: center; transition: all 0.15s; }
   .opt-btn:hover { background: #f5f5f5; }
-  .opt-btn-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .opt-btn-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; color: var(--text-secondary); }
   .opt-btn-name { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
   .opt-btn.sel-1 { background: #303c6c; border-color: #303c6c; }
-  .opt-btn.sel-1 .opt-btn-label { color: #ffffff; }
-  .opt-btn.sel-1 .opt-btn-name { color: #e8eaf3; }
+  .opt-btn.sel-1 .opt-btn-label, .opt-btn.sel-1 .opt-btn-name { color: #fff; }
   .opt-btn.sel-2 { background: #d4706b; border-color: #d4706b; }
-  .opt-btn.sel-2 .opt-btn-label { color: #ffffff; }
-  .opt-btn.sel-2 .opt-btn-name { color: #fdf0ef; }
+  .opt-btn.sel-2 .opt-btn-label, .opt-btn.sel-2 .opt-btn-name { color: #fff; }
   .opt-btn.sel-3 { background: #7aab96; border-color: #7aab96; }
-  .opt-btn.sel-3 .opt-btn-label { color: #ffffff; }
-  .opt-btn.sel-3 .opt-btn-name { color: #eaf4f0; }
+  .opt-btn.sel-3 .opt-btn-label, .opt-btn.sel-3 .opt-btn-name { color: #fff; }
 
   .output-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.25rem; background: #f8f8f8; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
   .output-meta { font-size: 12px; color: var(--text-hint); }
   .output-meta strong { color: var(--text-secondary); }
-  .btn-copy { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-secondary); cursor: pointer; font-family: inherit; transition: all 0.15s; }
-  .btn-copy:hover { background: #f0f0f0; color: var(--text); }
+  .btn-copy { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff; color: var(--text-secondary); cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .btn-copy:hover { background: #f0f0f0; }
   .btn-copy.copied { background: #e8eaf3; border-color: #303c6c; color: #303c6c; }
-
   .output-text { padding: 1.25rem; font-family: "SFMono-Regular", "Consolas", monospace; font-size: 12.5px; line-height: 1.85; color: var(--text); white-space: pre-wrap; word-break: break-word; min-height: 300px; max-height: 620px; overflow-y: auto; }
 
   .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; text-align: center; color: var(--text-hint); }
-  .date-wrap { position: relative; display: flex; align-items: center; }
-  .date-wrap input[type="text"] { flex: 1; padding-right: 36px; }
-  .date-wrap input[type="date"] { position: absolute; right: 0; top: 0; width: 34px; height: 100%; opacity: 0; cursor: pointer; z-index: 2; }
-  .date-wrap::after { content: "📅"; position: absolute; right: 8px; font-size: 15px; pointer-events: none; z-index: 1; }
-  .date-parsed { font-size: 11px; color: #7aab96; margin-top: 3px; display: block; min-height: 16px; font-weight: 500; }
+  .empty-icon { font-size: 36px; margin-bottom: 1rem; opacity: 0.4; }
+  .empty-state p { font-size: 13px; }
 
   @media (max-width: 860px) { .page { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .page { padding: 1rem; } .tier-grid { grid-template-columns: 1fr; } .option-btns { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .page { padding: 1rem; } .tier-grid, .fees-row, .option-btns { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -125,7 +110,6 @@
 </header>
 
 <div class="page">
-  <!-- LEFT FORM -->
   <div>
     <div class="panel">
       <div class="panel-head">
@@ -135,9 +119,12 @@
       <div class="panel-body">
 
         <div class="form-group">
-          <label>Unit</label>
-          <select id="unitSelect" onchange="onUnitChange()">
-            <option value="">⏳ Loading units...</option>
+          <label>Room type</label>
+          <select id="roomType" onchange="onRoomTypeChange()">
+            <option value="">— Select room type —</option>
+            <option value="private">Private Room</option>
+            <option value="studio">Studio / 1 Bedroom</option>
+            <option value="twobedroom">2 Bedroom</option>
           </select>
         </div>
 
@@ -145,16 +132,16 @@
           <div>
             <label>Move-in date</label>
             <div class="date-wrap">
-              <input type="text" id="moveIn" placeholder="e.g. 24 Aug 2026 or 24/08/2026" oninput="onDateInput('moveIn')" onpaste="onDatePaste(event,'moveIn')">
-              <input type="date" id="moveInPicker" onchange="onPickerChange('moveIn')" title="Pick a date">
+              <input type="text" id="moveIn" placeholder="e.g. 24 Aug 2026" oninput="onDateInput('moveIn')" onpaste="onDatePaste(event,'moveIn')">
+              <input type="date" id="moveInPicker" onchange="onPickerChange('moveIn')">
             </div>
             <span class="date-parsed" id="moveInParsed"></span>
           </div>
           <div>
             <label>Move-out date</label>
             <div class="date-wrap">
-              <input type="text" id="moveOut" placeholder="e.g. 31 May 2027 or 31/05/2027" oninput="onDateInput('moveOut')" onpaste="onDatePaste(event,'moveOut')">
-              <input type="date" id="moveOutPicker" onchange="onPickerChange('moveOut')" title="Pick a date">
+              <input type="text" id="moveOut" placeholder="e.g. 31 May 2027" oninput="onDateInput('moveOut')" onpaste="onDatePaste(event,'moveOut')">
+              <input type="date" id="moveOutPicker" onchange="onPickerChange('moveOut')">
             </div>
             <span class="date-parsed" id="moveOutParsed"></span>
           </div>
@@ -167,7 +154,12 @@
 
         <hr class="divider">
 
-        <label style="margin-bottom:10px; display:block;">Monthly rates (auto from unit)</label>
+        <div class="form-group">
+          <label>Base rate — Option 3 (full upfront) $</label>
+          <input type="number" id="rate3" placeholder="e.g. 2900" min="0" oninput="autoRates()">
+        </div>
+
+        <label style="margin-bottom:10px; display:block; font-size:11px; color:var(--text-hint);">Auto-calculated from base rate</label>
         <div class="tier-grid">
           <div class="tier-card t1">
             <div class="tier-label">Option 1</div>
@@ -182,7 +174,7 @@
           <div class="tier-card t3">
             <div class="tier-label">Option 3</div>
             <label>Full upfront (base)</label>
-            <input type="number" id="rate3" readonly tabindex="-1">
+            <input type="number" id="rate3display" readonly tabindex="-1">
           </div>
         </div>
 
@@ -198,16 +190,14 @@
         </div>
 
         <div class="form-group">
-          <label>Bank fee ($)</label>
-          <input type="number" id="bankFee" value="15" min="0" oninput="autoGenerate()">
+          <label>Bank fee (auto)</label>
+          <input type="number" id="bankFee" readonly tabindex="-1">
         </div>
 
-        <div class="error-msg" id="errorMsg"></div>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT OUTPUT -->
   <div class="right-col">
     <div class="panel" id="summaryPanel" style="display:none;">
       <div class="panel-body" style="padding:1rem 1.25rem;">
@@ -227,18 +217,18 @@
           <div class="opt-btn-name">2 instalments</div>
         </button>
         <button class="opt-btn" id="obtn3" onclick="pickOption(3)">
-          <div class="opt-btn-label">Option 3</div>
+          <div class="opt-btn-label" id="obtn3label">Option 3</div>
           <div class="opt-btn-name">Full upfront</div>
         </button>
       </div>
       <div class="output-toolbar">
-        <span class="output-meta" id="outputMeta">Select a unit and enter dates to begin</span>
+        <span class="output-meta" id="outputMeta">Select a room type and enter dates to begin</span>
         <button class="btn-copy" id="copyBtn" onclick="copyText()">⎘ Copy text</button>
       </div>
       <div id="outputArea">
         <div class="empty-state">
           <div class="empty-icon">📄</div>
-          <p>Select a unit and enter dates on the left.<br>The recap will appear here automatically.</p>
+          <p>Fill in the details on the left.<br>The recap will appear here automatically.</p>
         </div>
       </div>
     </div>
@@ -246,155 +236,55 @@
 </div>
 
 <script>
-// ── GOOGLE SHEETS JSON FEED ──────────────────────────────────
-const SHEET_ID = "1crYNC1Cmm7-P6EqZzItJ3dZBll5gXWEwdhpzwOVVInc";
-const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+// ── CLEANING FEES ─────────────────────────────────────────────
+const CLEANING_FEES = {
+  private:    { academic: 225, summer: 125 },
+  studio:     { academic: 300, summer: 150 },
+  twobedroom: { academic: 450, summer: 250 },
+};
 
-let UNITS = {};
-
-function loadUnitsFromSheet() {
-  const sel = document.getElementById("unitSelect");
-  sel.innerHTML = '<option value="">⏳ Loading units...</option>';
-
-  window._sheetCallback = function(response) {
-    try {
-      console.log("Raw response:", typeof response, response);
-      let json;
-      if (typeof response === "object") {
-        // gviz sometimes passes parsed object directly
-        json = response;
-      } else {
-        // strip the /*O_o*/ google.visualization.Query.setResponse( ... ); wrapper
-        const match = response.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/);
-        const cleaned = match ? match[1] : response.substr(47).slice(0,-2);
-        json = JSON.parse(cleaned);
-      }
-      console.log("Parsed json:", json);
-      const cols = json.table.cols.map(c => c.label || c.id);
-      console.log("Columns:", cols);
-      const rows = json.table.rows.map(row => {
-        const obj = {};
-        row.c.forEach((cell, i) => { obj[cols[i]] = cell ? cell.v : ""; });
-        return obj;
-      });
-      console.log("Rows:", rows);
-      populateUnits(rows);
-    } catch(e) {
-      console.error("Parse error:", e);
-      loadFallbackUnits();
-    }
-  };
-
-  const s = document.createElement("script");
-  s.src = SHEET_URL + "&callback=_sheetCallback";
-  s.onerror = () => loadFallbackUnits();
-  document.head.appendChild(s);
-
-  setTimeout(() => { if (Object.keys(UNITS).length === 0) loadFallbackUnits(); }, 6000);
-}
-
-function populateUnits(rows) {
-  const sel = document.getElementById("unitSelect");
-  UNITS = {};
-  sel.innerHTML = '<option value="">— Select a unit —</option>';
-  rows.forEach(row => {
-    const getVal = (...keys) => { for (const k of keys) { if (row[k] !== undefined && row[k] !== "") return row[k]; } return ""; };
-    const unit     = String(getVal("Unit name/number", "Unit") || "").trim();
-    const type     = String(getVal("Room type (Private / Studio / 2-bed)", "Room type", "Type") || "").trim();
-    const rate3    = parseFloat(getVal("Option 3 rate ($/mo)", "Option 3 rate", "Rate") || 0);
-    const cleanFee = parseFloat(getVal("Exit Cleaning Fee", "Exit cleaning fee", "Cleaning fee") || 225);
-    const address  = String(getVal("Address") || "").trim();
-    if (!unit || !rate3) return;
-    UNITS[unit] = { type, rate3, cleanSummer: cleanFee, cleanAcademic: cleanFee, address };
-    const opt = document.createElement("option");
-    opt.value = unit;
-    opt.textContent = unit + " — " + type;
-    sel.appendChild(opt);
-  });
-}
-
-function loadFallbackUnits() {
-  const fallback = [
-    ["308E 2R","2 Bedroom","5200","450",""],
-    ["308E 2RL","Private Room","2500","225",""],
-    ["308E 2RR","Private Room","2700","225",""],
-    ["111 5RR","Private Room","2750","225",""],
-    ["35 1A","2 Bedroom","5600","450",""],
-    ["35 1AL","Private Room","2800","225",""],
-    ["35 1AR","Private Room","2800","225",""],
-    ["308W 3RR","Private Room","2750","225",""],
-    ["133 3FR","Private Room","2900","225",""],
-    ["235 5F","Junior 1 Bedroom","5000","300",""],
-    ["235 5R","Junior 1 Bedroom","5000","300",""],
-  ];
-  const sel = document.getElementById("unitSelect");
-  sel.innerHTML = '<option value="">— Select a unit (offline data) —</option>';
-  fallback.forEach(([unit, type, rate3raw, cleanFeeRaw, address]) => {
-    UNITS[unit] = { type, rate3: parseFloat(rate3raw), cleanSummer: parseFloat(cleanFeeRaw), cleanAcademic: parseFloat(cleanFeeRaw), address };
-    const opt = document.createElement("option");
-    opt.value = unit;
-    opt.textContent = unit + " — " + type;
-    sel.appendChild(opt);
-  });
-}
-
-let outputs = { 1: "", 2: "", 3: "" };
 let generated = false;
 let selectedOption = 0;
+let outputs = { 1:"", 2:"", 3:"" };
 
-// ── DATE HELPERS ─────────────────────────────────────────────
+// ── DATE ─────────────────────────────────────────────────────
 const MONTHS = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12 };
 
 function parseDate(str) {
   if (!str) return null;
-  str = str.trim().replace(/\s+/g, " ");
-
-  // Try "24 Aug 26" or "24 Aug 2026" or "24-Aug-2026"
+  str = str.trim().replace(/\s+/g," ");
   const mName = str.match(/^(\d{1,2})[\s\-\/]+([a-zA-Z]{3,})[\s\-\/,]*(\d{2,4})$/);
   if (mName) {
     let [,d,mon,y] = mName;
     const m = MONTHS[mon.toLowerCase().slice(0,3)];
     if (!m) return null;
-    let year = parseInt(y);
-    if (year < 100) year += 2000;
+    let year = parseInt(y); if (year < 100) year += 2000;
     return makeDate(parseInt(d), m, year);
   }
-
-  // Try DD/MM/YYYY or DD-MM-YYYY or DD.MM.YYYY
-  const mSlash = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+  const mSlash = str.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})$/);
   if (mSlash) {
-    let [,d,m,y] = mSlash;
-    let year = parseInt(y);
-    if (year < 100) year += 2000;
+    let [,d,m,y] = mSlash; let year = parseInt(y); if (year < 100) year += 2000;
     return makeDate(parseInt(d), parseInt(m), year);
   }
-
-  // Try YYYY-MM-DD (from date picker)
   const mISO = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (mISO) {
-    const [,y,m,d] = mISO;
-    return makeDate(parseInt(d), parseInt(m), parseInt(y));
-  }
-
+  if (mISO) { const [,y,m,d] = mISO; return makeDate(parseInt(d),parseInt(m),parseInt(y)); }
   return null;
 }
 
-function makeDate(d, m, y) {
-  if (!d || !m || !y || y < 2020 || y > 2099) return null;
-  const dt = new Date(y, m-1, d);
-  if (dt.getFullYear()!==y || dt.getMonth()!==m-1 || dt.getDate()!==d) return null;
+function makeDate(d,m,y) {
+  if (!d||!m||!y||y<2020||y>2099) return null;
+  const dt = new Date(y,m-1,d);
+  if (dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d) return null;
   return dt;
 }
 
 function formatDisplay(dt) {
-  if (!dt) return "";
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   return dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear();
 }
 
 function toPickerValue(dt) {
-  if (!dt) return "";
-  return dt.getFullYear() + "-" + String(dt.getMonth()+1).padStart(2,"0") + "-" + String(dt.getDate()).padStart(2,"0");
+  return dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
 }
 
 function onDateInput(id) {
@@ -408,314 +298,268 @@ function onDateInput(id) {
   } else if (val.length > 4) {
     parsedEl.textContent = "⚠ Format not recognised";
     parsedEl.style.color = "#d4706b";
-  } else {
-    parsedEl.textContent = "";
-  }
+  } else { parsedEl.textContent = ""; }
   updateCleaningFee();
   autoGenerate();
 }
 
 function onDatePaste(e, id) {
   e.preventDefault();
-  const pasted = (e.clipboardData || window.clipboardData).getData("text").trim();
+  const pasted = (e.clipboardData||window.clipboardData).getData("text").trim();
   document.getElementById(id).value = pasted;
   onDateInput(id);
 }
 
 function onPickerChange(id) {
-  const pickerVal = document.getElementById(id+"Picker").value;
-  const dt = parseDate(pickerVal);
-  if (dt) {
-    document.getElementById(id).value = formatDisplay(dt);
-    onDateInput(id);
-  }
+  const dt = parseDate(document.getElementById(id+"Picker").value);
+  if (dt) { document.getElementById(id).value = formatDisplay(dt); onDateInput(id); }
 }
 
-function onDateInput_legacy() {} // kept for safety
-
-function daysInMonth(y, m) { return new Date(y, m, 0).getDate(); }
-
-function fmtDate(y, m, d) {
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  return String(d).padStart(2,"0") + " " + months[m-1] + " " + y;
-}
-
-function money(n) {
-  return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-// ── BOOKING TYPE DETECTION ───────────────────────────────────
+// ── ROOM TYPE & CLEANING FEE ──────────────────────────────────
 function detectBookingType(moveIn, moveOut) {
-  const months = (moveOut - moveIn) / (1000 * 60 * 60 * 24 * 30.44);
-  const inMonth = moveIn.getMonth() + 1; // 1-based
-  // Summer: starts Jun, ends by mid-Aug, roughly < 3.5 months
-  if (inMonth >= 6 && inMonth <= 7 && months < 3.5) return "summer";
-  return "academic";
+  const months = (moveOut - moveIn) / (1000*60*60*24*30.44);
+  return months <= 3 ? "summer" : "academic";
 }
 
-// ── BREAKDOWN BUILDER ────────────────────────────────────────
-function buildBreakdown(moveIn, moveOut, rate) {
-  const lines = [];
-  let total = 0;
-  let d = new Date(moveIn);
-  const end = new Date(moveOut);
-  while (d < end) {
-    const y = d.getFullYear(), m = d.getMonth() + 1;
-    const dim = daysInMonth(y, m);
-    const startDay = d.getDate();
-    const lastOfMonth = new Date(y, m - 1, dim);
-    const segEnd = end <= lastOfMonth ? end : lastOfMonth;
-    const endDay = segEnd.getDate();
-    const days = endDay - startDay + 1;
-    const dailyRate = Math.round((rate / dim) * 100) / 100;
-    const amount = days === dim ? rate : Math.round(dailyRate * days * 100) / 100;
-    lines.push({ label: fmtDate(y, m, startDay) + " – " + fmtDate(y, m, endDay), amount });
-    total += amount;
-    d = new Date(y, m - 1, dim + 1);
+function updateCleaningFee() {
+  const roomType = document.getElementById("roomType").value;
+  if (!roomType) return;
+  const moveIn = parseDate(document.getElementById("moveIn").value);
+  const moveOut = parseDate(document.getElementById("moveOut").value);
+  const fees = CLEANING_FEES[roomType];
+  if (!fees) return;
+
+  if (moveIn && moveOut && moveOut > moveIn) {
+    const type = detectBookingType(moveIn, moveOut);
+    document.getElementById("cleaning").value = fees[type];
+    document.getElementById("bookingTypeRow").style.display = "block";
+    const tag = document.getElementById("bookingTag");
+    tag.textContent = type==="summer" ? "☀ Summer booking" : "🎓 Full academic year";
+    tag.className = "booking-tag "+(type==="summer"?"tag-summer":"tag-academic");
+  } else {
+    document.getElementById("cleaning").value = fees.academic;
   }
-  return { lines, total: Math.round(total * 100) / 100 };
 }
 
-// ── SUMMARY BLOCK ────────────────────────────────────────────
-function optionSummaryBlock(r1, r2, r3, chosenOpt) {
-  const mark = (n) => n === chosenOpt ? " ✔ (selected)" : "";
-  return `OPTION 1${mark(1)}
+function onRoomTypeChange() {
+  updateCleaningFee();
+  autoGenerate();
+}
+
+// ── RATES ─────────────────────────────────────────────────────
+function autoRates() {
+  const base = parseFloat(document.getElementById("rate3").value)||0;
+  document.getElementById("rate1").value = base+500;
+  document.getElementById("rate2").value = base+200;
+  document.getElementById("rate3display").value = base;
+  autoGenerate();
+}
+
+// ── HELPERS ──────────────────────────────────────────────────
+function daysInMonth(y,m) { return new Date(y,m,0).getDate(); }
+
+function fmtDate(y,m,d) {
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return String(d).padStart(2,"0")+" "+months[m-1]+" "+y;
+}
+
+function money(n) { return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function buildBreakdown(moveIn, moveOut, rate) {
+  const lines = []; let total = 0;
+  let d = new Date(moveIn); const end = new Date(moveOut);
+  while (d < end) {
+    const y=d.getFullYear(), m=d.getMonth()+1, dim=daysInMonth(y,m);
+    const startDay=d.getDate();
+    const lastOfMonth=new Date(y,m-1,dim);
+    const segEnd = end<=lastOfMonth ? end : lastOfMonth;
+    const endDay=segEnd.getDate(), days=endDay-startDay+1;
+    const dailyRate=Math.round((rate/dim)*100)/100;
+    const amount=days===dim ? rate : Math.round(dailyRate*days*100)/100;
+    lines.push({label:fmtDate(y,m,startDay)+" – "+fmtDate(y,m,endDay), amount});
+    total+=amount;
+    d=new Date(y,m-1,dim+1);
+  }
+  return {lines, total:Math.round(total*100)/100};
+}
+
+function optionSummaryBlock(r1,r2,r3,chosenOpt,isSummer) {
+  const mark = n => n===chosenOpt ? " ✔ (selected)" : "";
+  const opt3label = isSummer ? "OPTION 2" : "OPTION 3";
+  const opt3mark = chosenOpt===3 ? " ✔ (selected)" : "";
+  let block = `OPTION 1${mark(1)}
 • ${money(r1)} per month inclusive of utilities
 • Payment made monthly, subject to background check, credit check and/or 3rd party guarantor
-
+`;
+  if (!isSummer) {
+    block += `
 OPTION 2${mark(2)}
 • ${money(r2)} per month inclusive of utilities
 • Payments split into 2 instalments, no guarantor required
-
-OPTION 3${mark(3)}
+`;
+  }
+  block += `
+${opt3label}${opt3mark}
 • ${money(r3)} per month inclusive of utilities
 • Full rental paid upfront upon signing, no guarantor required`;
+  return block;
 }
 
-// ── BUILD FULL RECAP ─────────────────────────────────────────
-function buildFull(moveIn, moveOut, r1, r2, r3, bankFee, dep, clean, chosenOpt, unitKey, address) {
+function buildFull(moveIn, moveOut, r1, r2, r3, bankFee, dep, clean, chosenOpt, isSummer) {
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const fmtD = (dt) => dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear();
+  const fmtD = dt => dt.getDate()+" "+months[dt.getMonth()]+" "+dt.getFullYear();
+  const header = "";
+  const summary = optionSummaryBlock(r1,r2,r3,chosenOpt,isSummer);
+  const opt3label = isSummer ? "OPTION 2" : "OPTION 3";
+  let bd = "";
 
-  const header = `${address ? address + "\n" : ""}Unit ${unitKey}
-Move-in: ${fmtD(moveIn)}
-Move-out: ${fmtD(moveOut)}
-
-`;
-  const summary = optionSummaryBlock(r1, r2, r3, chosenOpt);
-  let breakdownSection = "";
-
-  if (chosenOpt === 1) {
-    const { lines } = buildBreakdown(moveIn, moveOut, r1);
-    const moveInDay = moveIn.getDate();
-    const signingLines = moveInDay !== 1 ? lines.slice(0, 2) : lines.slice(0, 1);
-    const signingSubtotal = Math.round(signingLines.reduce((a,l) => a+l.amount, 0)*100)/100;
-    const totalDue = Math.round((signingSubtotal + bankFee + dep)*100)/100;
-    breakdownSection = `
-─────────────────────────────────────────
+  if (chosenOpt===1) {
+    const {lines} = buildBreakdown(moveIn,moveOut,r1);
+    const sl = moveIn.getDate()!==1 ? lines.slice(0,2) : lines.slice(0,1);
+    const sub = Math.round(sl.reduce((a,l)=>a+l.amount,0)*100)/100;
+    const due = Math.round((sub+bankFee+dep)*100)/100;
+    bd = `\n─────────────────────────────────────────
 OPTION 1 — Pricing breakdown
 
 Under this rate of ${money(r1)} per month, you'll have to pay the prorated rental of 1-month rent + security deposit upon signing. Subsequently, rent payment will be automatically deducted from one authorised bank account on the 1st of each month. However, if the 1st of the month falls on a weekend or bank holiday, the deduction will occur on the last business day prior to that date.
 
-${signingLines.map(l => "• " + l.label + " : " + money(l.amount)).join("\n")}
+${sl.map(l=>"• "+l.label+" : "+money(l.amount)).join("\n")}
 • Bank fee: ${money(bankFee)}
 • Security deposit: ${money(dep)} (Assuming that there are no missing items and/or damages in the apartment, we will refund the deposit at the end of your stay, after deducting a mandatory exit cleaning fee of ${money(clean)})
 
-Total Amount Due: ${money(totalDue)} (Due upon signing the Licence Agreement)`;
+Total Amount Due: ${money(due)} (Due upon signing the Licence Agreement)`;
   }
 
-  if (chosenOpt === 2) {
-    const { lines } = buildBreakdown(moveIn, moveOut, r2);
+  if (chosenOpt===2) {
+    const {lines} = buildBreakdown(moveIn,moveOut,r2);
     let splitIdx = lines.length;
-    for (let i = 0; i < lines.length; i++) {
-      if (lines[i].label.includes("Feb")) { splitIdx = i; break; }
-    }
-    if (splitIdx === lines.length && lines.length > 1) splitIdx = Math.ceil(lines.length / 2);
-    const half1 = lines.slice(0, splitIdx);
-    const half2 = lines.slice(splitIdx);
-    const sum1 = Math.round(half1.reduce((a,l) => a+l.amount,0)*100)/100;
-    const sum2 = Math.round(half2.reduce((a,l) => a+l.amount,0)*100)/100;
-    const due1 = Math.round((sum1 + bankFee)*100)/100;
-    const due2 = Math.round((sum2 + bankFee + dep)*100)/100;
-    const nextYear = new Date().getFullYear() + 1;
-    breakdownSection = `
-─────────────────────────────────────────
+    for (let i=0;i<lines.length;i++) { if (lines[i].label.includes("Feb")) { splitIdx=i; break; } }
+    if (splitIdx===lines.length && lines.length>1) splitIdx=Math.ceil(lines.length/2);
+    const h1=lines.slice(0,splitIdx), h2=lines.slice(splitIdx);
+    const s1=Math.round(h1.reduce((a,l)=>a+l.amount,0)*100)/100;
+    const s2=Math.round(h2.reduce((a,l)=>a+l.amount,0)*100)/100;
+    const d1=Math.round((s1+bankFee)*100)/100;
+    const d2=Math.round((s2+bankFee+dep)*100)/100;
+    const nextYear=new Date().getFullYear()+1;
+    bd = `\n─────────────────────────────────────────
 OPTION 2 — Pricing breakdown
 
 Under this discounted rate of ${money(r2)} per month, we will require the first half of your stay's rental payment to be paid upfront when signing the licence agreement.
 
 First instalment (due upon signing):
-${half1.map(l => "• " + l.label + " : " + money(l.amount)).join("\n")}
+${h1.map(l=>"• "+l.label+" : "+money(l.amount)).join("\n")}
 • Bank fee: ${money(bankFee)}
-Total Amount Due (1st instalment): ${money(due1)}
+Total Amount Due (1st instalment): ${money(d1)}
 
 Second instalment (due 01 Jan ${nextYear}):
-${half2.map(l => "• " + l.label + " : " + money(l.amount)).join("\n")}
+${h2.map(l=>"• "+l.label+" : "+money(l.amount)).join("\n")}
 • Bank fee: ${money(bankFee)}
 • Security deposit: ${money(dep)} (Assuming that there are no missing items and/or damages in the apartment, we will refund the deposit at the end of your stay, after deducting a mandatory exit cleaning fee of ${money(clean)})
-Total Amount Due (2nd instalment): ${money(due2)}`;
+Total Amount Due (2nd instalment): ${money(d2)}`;
   }
 
-  if (chosenOpt === 3) {
-    const { lines, total } = buildBreakdown(moveIn, moveOut, r3);
-    const totalDue = Math.round((total + bankFee + dep)*100)/100;
-    breakdownSection = `
-─────────────────────────────────────────
-OPTION 3 — Pricing breakdown
+  if (chosenOpt===3) {
+    const {lines,total}=buildBreakdown(moveIn,moveOut,r3);
+    const due=Math.round((total+bankFee+dep)*100)/100;
+    bd = `\n─────────────────────────────────────────
+${opt3label} — Pricing breakdown
 
 Under this rate of ${money(r3)} per month, we will require the full rental payment in addition to the security deposit (equivalent to 1 month's rental) to be paid upfront when signing the licence agreement.
 
-${lines.map(l => "• " + l.label + " : " + money(l.amount)).join("\n")}
+${lines.map(l=>"• "+l.label+" : "+money(l.amount)).join("\n")}
 • Bank fee: ${money(bankFee)}
 • Security deposit: ${money(dep)} (Assuming that there are no missing items and/or damages in the apartment, we will refund the deposit at the end of your stay, after deducting a mandatory exit cleaning fee of ${money(clean)})
 
-Total Amount Due: ${money(totalDue)} (Due upon signing the Licence Agreement)`;
+Total Amount Due: ${money(due)} (Due upon signing the Licence Agreement)`;
   }
 
-  return `${header}${summary}\n${breakdownSection}`;
+  return header+summary+"\n"+bd;
 }
 
-// ── EVENT HANDLERS ───────────────────────────────────────────
-function onUnitChange() {
-  const unit = UNITS[document.getElementById("unitSelect").value];
-  if (!unit) {
-    ["rate1","rate2","rate3","cleaning","deposit"].forEach(id => document.getElementById(id).value = "");
-    return;
-  }
-  document.getElementById("rate3").value = unit.rate3;
-  document.getElementById("rate2").value = unit.rate3 + 200;
-  document.getElementById("rate1").value = unit.rate3 + 500;
-  updateCleaningFee();
-  autoGenerate();
-}
-
-function updateCleaningFee() {
-  const unitKey = document.getElementById("unitSelect").value;
-  const unit = UNITS[unitKey];
-  if (!unit) return;
-  const moveIn = parseDate(document.getElementById("moveIn").value);
-  const moveOut = parseDate(document.getElementById("moveOut").value);
-  if (!moveIn || !moveOut) {
-    document.getElementById("cleaning").value = unit.cleanAcademic;
-    return;
-  }
-  const type = detectBookingType(moveIn, moveOut);
-  const fee = type === "summer" ? unit.cleanSummer : unit.cleanAcademic;
-  document.getElementById("cleaning").value = fee;
-  document.getElementById("bookingTypeRow").style.display = "block";
-  const tag = document.getElementById("bookingTag");
-  tag.textContent = type === "summer" ? "☀ Summer booking" : "🎓 Full academic year";
-  tag.className = "booking-tag " + (type === "summer" ? "tag-summer" : "tag-academic");
-}
-
+// ── AUTO-GENERATE ─────────────────────────────────────────────
 function autoGenerate() {
-  const unitKey = document.getElementById("unitSelect").value;
-  const unit = UNITS[unitKey];
-  if (!unit) return;
+  const roomType = document.getElementById("roomType").value;
+  if (!roomType) return;
+  const r3 = parseFloat(document.getElementById("rate3").value)||0;
+  if (!r3) return;
+  const r2=r3+200, r1=r3+500;
   const moveIn = parseDate(document.getElementById("moveIn").value);
   const moveOut = parseDate(document.getElementById("moveOut").value);
-  if (!moveIn || !moveOut || moveOut <= moveIn) return;
+  if (!moveIn||!moveOut||moveOut<=moveIn) return;
 
-  const r3 = unit.rate3;
-  const r2 = r3 + 200;
-  const r1 = r3 + 500;
-  const bankFee = parseFloat(document.getElementById("bankFee").value) || 15;
-  const clean = parseFloat(document.getElementById("cleaning").value) || unit.cleanAcademic;
-  const dep1 = r1, dep2 = r2, dep3 = r3;
+  const bankFee = 15 * (roomType==="twobedroom" ? 2 : 1);
+  document.getElementById("bankFee").value = bankFee;
+  const clean = parseFloat(document.getElementById("cleaning").value)||CLEANING_FEES[roomType].academic;
+  const dep1=r1, dep2=r2, dep3=r3;
 
-  document.getElementById("deposit").value = selectedOption === 1 ? dep1 : selectedOption === 2 ? dep2 : dep3;
+  document.getElementById("deposit").value = selectedOption===1?dep1:selectedOption===2?dep2:dep3;
 
-  const address = unit.address || "";
-  outputs[1] = buildFull(moveIn, moveOut, r1, r2, r3, bankFee, dep1, clean, 1, unitKey, address);
-  outputs[2] = buildFull(moveIn, moveOut, r1, r2, r3, bankFee, dep2, clean, 2, unitKey, address);
-  outputs[3] = buildFull(moveIn, moveOut, r1, r2, r3, bankFee, dep3, clean, 3, unitKey, address);
+  outputs[1]=buildFull(moveIn,moveOut,r1,r2,r3,bankFee,dep1,clean,1,isSummer);
+  outputs[2]=buildFull(moveIn,moveOut,r1,r2,r3,bankFee,dep2,clean,2,isSummer);
+  outputs[3]=buildFull(moveIn,moveOut,r1,r2,r3,bankFee,dep3,clean,3,isSummer);
 
-  // Summary totals
-  const t1 = Math.round((buildBreakdown(moveIn, moveOut, r1).total + bankFee + dep1)*100)/100;
-  const t3 = Math.round((buildBreakdown(moveIn, moveOut, r3).total + bankFee + dep3)*100)/100;
-  const bd2 = buildBreakdown(moveIn, moveOut, r2);
-  const half1sum = Math.round(bd2.lines.slice(0, Math.ceil(bd2.lines.length/2)).reduce((a,l)=>a+l.amount,0)*100)/100;
-  const t2first = Math.round((half1sum + bankFee)*100)/100;
+  const t1=Math.round((buildBreakdown(moveIn,moveOut,r1).total+bankFee+dep1)*100)/100;
+  const t3=Math.round((buildBreakdown(moveIn,moveOut,r3).total+bankFee+dep3)*100)/100;
+  const bd2=buildBreakdown(moveIn,moveOut,r2);
+  const h1sum=Math.round(bd2.lines.slice(0,Math.ceil(bd2.lines.length/2)).reduce((a,l)=>a+l.amount,0)*100)/100;
+  const t2first=Math.round((h1sum+bankFee)*100)/100;
 
-  document.getElementById("summaryCards").innerHTML = `
-    <div class="sum-card c1">
-      <div class="sum-card-label">Option 1 — Total</div>
-      <div class="sum-card-val">${money(t1)}</div>
-      <div class="sum-card-sub">Monthly • ${money(r1)}/mo</div>
-    </div>
-    <div class="sum-card c2">
-      <div class="sum-card-label">Option 2 — 1st instalment</div>
-      <div class="sum-card-val">${money(t2first)}</div>
-      <div class="sum-card-sub">2 instalments • ${money(r2)}/mo</div>
-    </div>
-    <div class="sum-card c3">
-      <div class="sum-card-label">Option 3 — Total</div>
-      <div class="sum-card-val">${money(t3)}</div>
-      <div class="sum-card-sub">Full upfront • ${money(r3)}/mo</div>
-    </div>`;
+  const type = detectBookingType(moveIn, moveOut);
+  const isSummer = type === "summer";
 
-  document.getElementById("summaryPanel").style.display = "block";
-  generated = true;
+  document.getElementById("summaryCards").innerHTML=`
+    <div class="sum-card c1"><div class="sum-card-label">Option 1 — Total</div><div class="sum-card-val">${money(t1)}</div><div class="sum-card-sub">Monthly • ${money(r1)}/mo</div></div>
+    ${isSummer ? "" : `<div class="sum-card c2"><div class="sum-card-label">Option 2 — 1st instalment</div><div class="sum-card-val">${money(t2first)}</div><div class="sum-card-sub">2 instalments • ${money(r2)}/mo</div></div>`}
+    <div class="sum-card c3"><div class="sum-card-label">Option 3 — Total</div><div class="sum-card-val">${money(t3)}</div><div class="sum-card-sub">Full upfront • ${money(r3)}/mo</div></div>`;
 
-  if (selectedOption) {
-    pickOption(selectedOption);
-  } else {
-    document.getElementById("outputMeta").innerHTML = "Select the student's preferred option above";
-    document.getElementById("outputArea").innerHTML = `<div class="empty-state"><div class="empty-icon">👆</div><p>Select the student's preferred option<br>to generate the final recap text.</p></div>`;
+  document.getElementById("summaryPanel").style.display="block";
+  generated=true;
+
+  // Hide/rename Option 2 for summer bookings
+  document.getElementById("obtn2").style.display = isSummer ? "none" : "";
+  document.getElementById("obtn3label").textContent = isSummer ? "Option 2" : "Option 3";
+  if (isSummer && selectedOption === 2) { selectedOption = 0; }
+
+  if (selectedOption) pickOption(selectedOption);
+  else {
+    document.getElementById("outputMeta").innerHTML = isSummer ? "Select Option 1 or Option 3 above" : "Select the student's preferred option above";
+    document.getElementById("outputArea").innerHTML=`<div class="empty-state"><div class="empty-icon">👆</div><p>${isSummer ? "Summer bookings have Option 1 and Option 3 only." : "Select the student's preferred option."}</p></div>`;
   }
 }
 
 function pickOption(n) {
   if (!generated) return;
-  selectedOption = n;
-  [1,2,3].forEach(i => {
-    document.getElementById("obtn"+i).className = "opt-btn" + (i===n ? " sel-"+i : "");
-  });
-
-  const r3 = parseFloat(document.getElementById("rate3").value) || 0;
-  const rates = { 1: r3+500, 2: r3+200, 3: r3 };
-  document.getElementById("deposit").value = rates[n];
-
-  const labels = { 1: "Option 1 — Monthly debit", 2: "Option 2 — 2 instalments", 3: "Option 3 — Full upfront" };
-  document.getElementById("outputMeta").innerHTML = `<strong>${labels[n]}</strong> selected`;
-
-  const rendered = escHtml(outputs[n]).replace(/(OPTION \d ✔ \(selected\))/g, "<strong>$1</strong>");
-  document.getElementById("outputArea").innerHTML = `<div class="output-text">${rendered}</div>`;
-  document.getElementById("copyBtn").className = "btn-copy";
-  document.getElementById("copyBtn").innerHTML = "⎘ Copy text";
+  selectedOption=n;
+  [1,2,3].forEach(i=>{ document.getElementById("obtn"+i).className="opt-btn"+(i===n?" sel-"+i:""); });
+  const r3=parseFloat(document.getElementById("rate3").value)||0;
+  document.getElementById("deposit").value = n===1?r3+500:n===2?r3+200:r3;
+  const isSummerNow = document.getElementById("obtn2").style.display === "none";
+  const labels={1:"Option 1 — Monthly debit",2:"Option 2 — 2 instalments",3: isSummerNow ? "Option 2 — Full upfront" : "Option 3 — Full upfront"};
+  document.getElementById("outputMeta").innerHTML=`<strong>${labels[n]}</strong> selected`;
+  const rendered=escHtml(outputs[n]).replace(/(OPTION \d ✔ \(selected\))/g,"<strong>$1</strong>");
+  document.getElementById("outputArea").innerHTML=`<div class="output-text">${rendered}</div>`;
+  document.getElementById("copyBtn").className="btn-copy";
+  document.getElementById("copyBtn").innerHTML="⎘ Copy text";
 }
 
-function escHtml(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-
-function clearError() { document.getElementById("errorMsg").style.display = "none"; }
+function escHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 function copyText() {
-  if (!selectedOption || !generated) return;
-  const text = outputs[selectedOption];
-  const btn = document.getElementById("copyBtn");
-  const markCopied = () => {
-    btn.className = "btn-copy copied";
-    btn.innerHTML = "✓ Copied!";
-    setTimeout(() => { btn.className = "btn-copy"; btn.innerHTML = "⎘ Copy text"; }, 2000);
-  };
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(markCopied).catch(() => fallbackCopy(text, markCopied));
-  } else {
-    fallbackCopy(text, markCopied);
-  }
+  if (!selectedOption||!generated) return;
+  const text=outputs[selectedOption];
+  const btn=document.getElementById("copyBtn");
+  const ok=()=>{ btn.className="btn-copy copied"; btn.innerHTML="✓ Copied!"; setTimeout(()=>{ btn.className="btn-copy"; btn.innerHTML="⎘ Copy text"; },2000); };
+  if (navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok).catch(()=>fallbackCopy(text,ok));
+  else fallbackCopy(text,ok);
 }
 
-function fallbackCopy(text, onSuccess) {
-  const ta = document.createElement("textarea");
-  ta.value = text;
-  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none;";
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
+function fallbackCopy(text,onSuccess) {
+  const ta=document.createElement("textarea");
+  ta.value=text; ta.style.cssText="position:fixed;top:0;left:0;opacity:0;pointer-events:none;";
+  document.body.appendChild(ta); ta.focus(); ta.select();
   try { document.execCommand("copy"); onSuccess(); } catch(e) { alert("Please copy manually: Ctrl+A then Ctrl+C"); }
   document.body.removeChild(ta);
 }
-// ── INIT ─────────────────────────────────────────────────────
-loadUnitsFromSheet();
 </script>
 </body>
 </html>
