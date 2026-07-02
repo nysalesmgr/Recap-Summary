@@ -495,6 +495,9 @@ function autoGenerate() {
   const clean = parseFloat(document.getElementById("cleaning").value)||CLEANING_FEES[roomType].academic;
   const dep1=r1, dep2=r2, dep3=r3;
 
+  const type = detectBookingType(moveIn, moveOut);
+  const isSummer = type === "summer";
+
   document.getElementById("deposit").value = selectedOption===1?dep1:selectedOption===2?dep2:dep3;
 
   outputs[1]=buildFull(moveIn,moveOut,r1,r2,r3,bankFee,dep1,clean,1,isSummer);
@@ -506,9 +509,6 @@ function autoGenerate() {
   const bd2=buildBreakdown(moveIn,moveOut,r2);
   const h1sum=Math.round(bd2.lines.slice(0,Math.ceil(bd2.lines.length/2)).reduce((a,l)=>a+l.amount,0)*100)/100;
   const t2first=Math.round((h1sum+bankFee)*100)/100;
-
-  const type = detectBookingType(moveIn, moveOut);
-  const isSummer = type === "summer";
 
   document.getElementById("summaryCards").innerHTML=`
     <div class="sum-card c1"><div class="sum-card-label">Option 1 — Total</div><div class="sum-card-val">${money(t1)}</div><div class="sum-card-sub">Monthly • ${money(r1)}/mo</div></div>
